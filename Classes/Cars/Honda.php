@@ -2,16 +2,28 @@
 require_once 'Cars.php';
 
 class Honda extends Cars{
-    public function __construct($member_capacity,$member = 0,$price,$acceleration,$decceleration,$max_speed,$height){
-        $this->name = "honda";
-        $this->member_capacity = $member_capacity;
-        $this->member = $member;
-        $this->price = $price;
-        $this->acceleration = $acceleration;
-        $this->decceleration = $decceleration;
-        $this->speed = 0;
-        $this->max_speed = $max_speed;
-        $this->height = $height;
+    function __construct(
+        $name = "honda",
+        $member_capacity = 5, #定員数
+        $member =0, #乗員数
+        $price = 2700, #価格
+        $acceleration = 70, #加速度
+        $deceleration = 50, #減速度
+        $speed = 0, #速度
+        $max_speed = 300, #最高速度
+        $height = 1200, #車高
+    ){
+        parent::__construct(
+            $name,
+            $member_capacity,
+            $member,
+            $price = mt_rand(2500, 3000),
+            $acceleration,
+            $deceleration,
+            $speed,
+            $max_speed,
+            $height
+        );
     }
 }
 ?>

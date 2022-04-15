@@ -3,29 +3,54 @@ require_once 'Cars.php';
 
 class Ferrari extends Cars{
 
-    protected $change_height;
-    protected $change_acceleration;
+    protected $change_height = false;
 
-    // リフトアップした時の処理
-    public function liftUp(){
-        echo "[リフトアップ]\n";
-        $this->change_height = $this->height + 40;
-        echo "リフトアップ後の車高：{$this->change_height}\n";
-        $this->change_acceleration = $this->acceleration * 0.8;
-        echo "リフトアップ後の加速度：{$this->change_acceleration}\n";
+    function __construct(
+        $name = "ferrari",
+        $member_capacity = 2, #定員数
+        $member =0, #乗員数
+        $price = 5300, #価格
+        $acceleration = 100, #加速度
+        $deceleration = 40, #減速度
+        $speed = 0, #速度
+        $max_speed = 340, #最高速度
+        $height = 1000, #車高
+    ){
+        $price = mt_rand(5000, 7000);
+        parent::__construct(
+            $name,
+            $member_capacity,
+            $member,
+            $price,
+            $acceleration,
+            $deceleration,
+            $speed,
+            $max_speed,
+            $height
+        );
     }
 
-    // リフトダウンした時の処理
-    public function liftDown(){
-        echo "[リフトダウン]\n";
-        if ($this->height < $this->change_height ) {
-            $this->height = $this->change_height - 40;
-            echo "リフトダウン後の車高：{$this->height}\n";
-            $this->acceleration = $this->change_acceleration / 0.8;
-            echo "リフトダウン後の加速度：{$this->acceleration}\n";
+    function getHeight(){
+        return $this->height;
+      }
+
+    // リフトアップとリフトダウンの処理
+    public function changeHeight(){
+        // 初期の車高だったらリフトアップをする
+        if(!$this->change_height){
+            $this->height += 40;
+            $this->acceleration *= 0.8;
+            echo "リフトアップ！\n";
+            echo "リフトアップ後の車高：{$this->height}mm\n";
+            echo "リフトアップ後の加速度：{$this->acceleration}m/s^2\n";
         } else {
-            echo "リフトダウン出来ません";
+            $this->height -= 40;
+            $this->acceleration /= 0.8;
+            echo "リフトダウン！";
+            echo "リフトダウン後の車高：{$this->height}mm\n";
+            echo "リフトダウン後の加速度：{$this->acceleration}m/s^2\n";
         }
+        $this->change_height = !($this->change_height);
     }
 }
 ?>
