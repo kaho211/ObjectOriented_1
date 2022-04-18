@@ -8,7 +8,7 @@ class Ferrari extends Cars{
     function __construct(
         $name = "ferrari",
         $member_capacity = 2, #定員数
-        $member =0, #乗員数
+        $member = 1, #乗員数
         $price = 5300, #価格
         $acceleration = 100, #加速度
         $deceleration = 40, #減速度
@@ -21,7 +21,7 @@ class Ferrari extends Cars{
             $name,
             $member_capacity,
             $member,
-            $price,
+            $price = mt_rand($price - 1000, $price + 2000),
             $acceleration,
             $deceleration,
             $speed,
@@ -35,7 +35,7 @@ class Ferrari extends Cars{
       }
 
     // リフトアップとリフトダウンの処理
-    public function changeHeight(){
+    public function isLiftUp(){
         // 初期の車高だったらリフトアップをする
         if(!$this->change_height){
             $this->height += 40;

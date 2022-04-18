@@ -5,5 +5,5 @@ require 'Classes\Cars\Ferrari.php';
 // 実行結果
 $ferrari = new Ferrari();
 $ferrari->printCarDetail();
-$ferrari->changeHeight();
+$ferrari->isLiftUp();
 ?>

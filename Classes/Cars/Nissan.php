@@ -5,7 +5,7 @@ class Nissan extends Cars{
     function __construct(
         $name = "nissan",
         $member_capacity = 4, #定員数
-        $member =0, #乗員数
+        $member =1, #乗員数
         $price = 560, #価格
         $acceleration = 30, #加速度
         $deceleration = 40, #減速度
@@ -17,8 +17,8 @@ class Nissan extends Cars{
             $name,
             $member_capacity,
             $member,
-            $price = mt_rand(500, 2000),
-            $acceleration,
+            $price = mt_rand($price - 50, $price + 2000),
+            $acceleration *= 0.6, #生産時の欠陥のため加速度は60%の性能
             $deceleration,
             $speed,
             $max_speed,
