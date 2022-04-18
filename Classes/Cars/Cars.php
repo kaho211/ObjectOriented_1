@@ -85,11 +85,11 @@ abstract class Cars
 
     #降りる
     public function getOff($person){
-        $this->member -= $person;
-        if($this->member < 1){
+        if($this->member <= 1){
             echo "誰も乗っていません。車に乗ってください。\n";
             return;
         } else {
+            $this->member -= $person;
             for ($i = 0; $i<$person; $i++){
             $this->acceleration = $this->acceleration/(0.95);
             }
