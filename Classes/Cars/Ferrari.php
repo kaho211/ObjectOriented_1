@@ -16,7 +16,6 @@ class Ferrari extends Cars{
         $max_speed = 340, #最高速度
         $height = 1000, #車高
     ){
-        $price = mt_rand(5000, 7000);
         parent::__construct(
             $name,
             $member_capacity,
