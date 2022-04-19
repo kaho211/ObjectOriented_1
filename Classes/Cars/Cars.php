@@ -85,7 +85,7 @@ abstract class Cars
 
     #降りる
     public function getOff($person){
-        if($this->member <= 1){
+        if($this->member - $person < 1){
             echo "誰も乗っていません。車に乗ってください。\n";
             return;
         } else {

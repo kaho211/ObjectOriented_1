@@ -12,5 +12,5 @@ $nissan->getOn(1);
 $nissan->getOn(3);
 echo "\n～降車中～\n";
 $nissan->getOff(1);
-$nissan->getOff(1);
+$nissan->getOff(2);
 ?>
