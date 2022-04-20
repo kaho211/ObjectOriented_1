@@ -49,7 +49,7 @@ abstract class Cars
 
     #アクセルを踏む
     public function pushAccel($time){
-        $this->speed += $time*$this->acceleration;
+        $this->speed += $time*($this->acceleration / 1000)*3600;
         if($this->speed > $this->max_speed){
             $this->speed = $this->max_speed;
             return;
@@ -58,7 +58,7 @@ abstract class Cars
 
     #ブレーキを踏む
     public function pushBreak($time){
-        $this->speed += $time * $this->deceleration;
+        $this->speed += $time * ($this->deceleration / 1000)*3600;
         if($this->speed < 0){
             $this->speed = 0;
             return;
