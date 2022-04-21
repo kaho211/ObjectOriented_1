@@ -6,8 +6,8 @@ abstract class Cars
     protected $member_capacity; #定員数
     protected $member; #乗員数
     protected $price; #価格
-    protected $acceleration; #加速度
-    protected $deceleration; #減速度
+    protected $acceleration; #加速度(m/s^2)
+    protected $deceleration; #減速度(m/s^2)
     protected $speed; #速度
     protected $max_speed; #最高速度
     protected $height; #車高
@@ -43,14 +43,20 @@ abstract class Cars
         return $this->members_capacity;
       }
   
-    public function getAcceleration(){
+    public function getAcceleration(){  #(m/s^2)
         return $this->acceleration;
       }
 
+    public function getSpeed_Mps(){  #時速から秒速に変換(m/s)
+        return round(($this->speed)* 1000 / 3600, 2);
+    }
+
     #アクセルを踏む
     public function pushAccel($time){
-        $this->speed += $time*($this->acceleration / 1000)*3600;
-        if($this->speed > $this->max_speed){
+        $this->speed = round(($this->speed)* 1000 / 3600, 2); #速さを時速から秒速に変換
+        $this->speed += $time*$this->acceleration;
+        $this->max_speed = round(($this->speed)* 1000 / 3600, 2); #最高速度を時速から秒速に変換
+        if($this->speed < $this->max_speed){ #秒速単位で速さと最高速度を比較
             $this->speed = $this->max_speed;
             return;
         }
@@ -58,7 +64,8 @@ abstract class Cars
 
     #ブレーキを踏む
     public function pushBreak($time){
-        $this->speed += $time * ($this->deceleration / 1000)*3600;
+        $this->speed = round(($this->speed)* 1000 / 3600, 2);
+        $this->speed += $time * $this->deceleration;
         if($this->speed < 0){
             $this->speed = 0;
             return;

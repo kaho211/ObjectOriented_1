@@ -7,10 +7,10 @@ class Toyota extends Cars{
         $member_capacity = 3,
         $member = 1,
         $price = 3000,
-        $acceleration = 50,
-        $deceleration = 40,
-        $speed = 0,
-        $max_speed = 200,
+        $acceleration = 50, #(m/s^2)
+        $deceleration = 40, #(m/s^2)
+        $speed = 0, #(km/h)
+        $max_speed = 200, #(km/h)
         $height = 1600,
     ){
         parent::__construct(

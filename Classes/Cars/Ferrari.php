@@ -10,10 +10,10 @@ class Ferrari extends Cars{
         $member_capacity = 2, #定員数
         $member = 1, #乗員数
         $price = 5300, #価格
-        $acceleration = 100, #加速度
-        $deceleration = 40, #減速度
-        $speed = 0, #速度
-        $max_speed = 340, #最高速度
+        $acceleration = 100, #加速度(m/s^2)
+        $deceleration = 40, #減速度(m/s^2)
+        $speed = 0, #速度(km/h)
+        $max_speed = 340, #最高速度(km/h)
         $height = 1000, #車高
     ){
         parent::__construct(

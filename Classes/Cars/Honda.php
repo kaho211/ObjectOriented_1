@@ -7,10 +7,10 @@ class Honda extends Cars{
         $member_capacity = 5, #定員数
         $member = 1, #乗員数
         $price = 2700, #価格
-        $acceleration = 70, #加速度
-        $deceleration = 50, #減速度
-        $speed = 0, #速度
-        $max_speed = 300, #最高速度
+        $acceleration = 70, #加速度(m/s^2)
+        $deceleration = 50, #減速度(m/s^2)
+        $speed = 0, #速度(km/h)
+        $max_speed = 300, #最高速度(km/h)
         $height = 1200, #車高
     ){
         parent::__construct(

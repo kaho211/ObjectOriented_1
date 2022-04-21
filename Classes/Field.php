@@ -20,15 +20,14 @@ class  Field{
 
             $car_data["object"]->pushAccel($delta_time); #アクセルを踏む→ここでブレーキ踏むかっていう条件(10％の確率で踏む)も付け加える
             $car_data["object"]->pushBreak(rand(1,10)*0.1*$delta_time); #ランダム秒間ブレーキを踏む
-            $speed = $car_data["object"]->getSpeed(); #速度
-            $car_data["position"] += ($speed * $delta_time); #進んだ距離
+            $car_data["position"] += round($car_data["object"]->getSpeed_Mps() * $delta_time, 2); #進んだ総距離 $speedは時速、$delta_timeは秒 →　単位をそろえる！($speedを秒速にする)
 
     }
 
     #レースを開始させる処理(0.5秒ごとにどれくらい進むか)
     public function raceStart(){
         #コースの長さ
-        $goal = 1000;
+        $goal = 100; #(m)
 
         echo "3\n";
         sleep(1);
@@ -40,9 +39,10 @@ class  Field{
         echo "レーススタート!\n\n";
         sleep(2);
 
-        #5秒間のレースで0.5秒ずつ更新（進む）
-        for($i = 0.5; $i< 5; $i+= 0.5){
-            echo "{$i}秒経過\n";
+        #10秒間のレースで10秒ずつ更新（進む）
+        for($i = 10; $i< 1000000; $i+= 10){
+            echo "\n----------------------------\n";            
+            echo "[{$i}秒経過]\n";
             usleep(500000);
 
             #$car_listsから一台ずつ車出す(出したものは$car_data)
@@ -52,18 +52,21 @@ class  Field{
 
                 #ゴールを超えたら処理を終了し、printResult()へ移動
                 if ($car_data["position"] > $goal){
-                    echo $car_data["object"]->getName() . "がゴール\n";
+                    echo "～" . $car_data["object"]->getName() . "がゴール～\n";
                     $index = array_search($car_data,$this->car_lists);
                     array_splice($this->car_lists, $index, 1);
-                    $this->result_list [] = ["車" => $car_data["object"]]; #ゴールした順（コースの全長を超えた順）に$result_listに入れていく
+                    $this->result_list [] = ["car" => $car_data["object"]]; #ゴールした順（コースの全長を超えた順）に$result_listに入れていく
                 } else {
-                    echo $car_data["object"]->getName() . "が" . $car_data["position"] . "km進んだ\n";
+                    echo $car_data["object"]->getName() . "が" . $car_data["position"] . "m進んだ\n";
+                    echo "速さ：" . $car_data["object"]->getSpeed() . "(km/h)\n";
+                    echo "速さ：" . $car_data["object"]->getSpeed_Mps() . "(m/s)\n";
+                    echo "加速度：" . $car_data["object"]->getAcceleration() . "(m/s^2)\n";
                     sleep(1);
                 }
             }
 
             if(count($this->car_lists) == 0){
-                echo "全員がゴールしました\n";
+                echo "～全員がゴールしました～\n";
                 break;
             }
         }
@@ -83,7 +86,7 @@ class  Field{
             sleep(1);
             echo "\n";
             echo $j + 1 . "位";
-            print_r ($this->result_list[$j]["車"]->getName());
+            print_r ($this->result_list[$j]["car"]->getName());
         }
     }
 }
